@@ -64,6 +64,7 @@ print(f"\nDevice used is {device}.")
 num_epochs = args.ne
 try:
     for epoch in range(num_epochs):
+        print(f"\nEpoch number {epoch+1} is starting now.")
         model.train()
         for x,y in tqdm.tqdm(dl):
             optimizer.zero_grad()
@@ -82,10 +83,13 @@ try:
             optimizer.step()
 
         model.eval()
-        model.to('cpu')
-        for i in range(5):
-            print(generate_sample(model=model,vectorizer=vectorizer))
-        model.to(device)
+
+        # model.to('cpu')
+        # for i in range(5):
+        #     print(generate_sample(model=model,vectorizer=vectorizer))
+        # model.to(device)
+
+        print(f"Epoch number {epoch+1} has now concluded.")
 
 except KeyboardInterrupt:
     print("\nTraining was interrupted. That's ok, I'll still save the latest model.")
