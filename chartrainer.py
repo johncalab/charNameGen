@@ -44,8 +44,6 @@ if args.dropout:
 else:
     model = charModel(vocab_size=len(vocab),padding_idx=maskid)
 
-print(f"\nDevice used is {device}.")
-
 ds = charDataset(vectorizer=vectorizer, corpus=corpus)
 dl = DataLoader(ds, batch_size=4, shuffle=True)
 
@@ -61,6 +59,7 @@ else:
     device = torch.device('cpu')
 # transfer model to device
 model.to(device)
+print(f"\nDevice used is {device}.")
 
 num_epochs = args.ne
 try:
