@@ -72,7 +72,7 @@ try:
             x = x.to(device)
             y = y.to(device)
 
-            y_pred = model(x, dropout=True)
+            y_pred = model(x)
 
             batch_size, seq_len, feats = y_pred.shape
             y_pred_loss = y_pred.view(batch_size*seq_len,feats)
