@@ -84,10 +84,10 @@ try:
 
         model.eval()
 
-        # model.to('cpu')
-        # for i in range(5):
-        #     print(generate_sample(model=model,vectorizer=vectorizer))
-        # model.to(device)
+        model.to('cpu')
+        for i in range(5):
+            print(generate_sample(model=model,vectorizer=vectorizer))
+        model.to(device)
 
         print(f"Epoch number {epoch+1} has now concluded.")
 
