@@ -1,3 +1,12 @@
+"""
+This is the main script to train a model.
+The parser requires a choice of a 'source', contained in the `source` folder.
+To select `source/firstnames.txt` one should pass the option `-source firstnames` to the parser.
+
+The trainer will save two things:
+    - the pytorch model in the `models` folder
+    - a pickled dictionary to decode the model outputs into text
+"""
 from charvocabulary import charVocabulary
 from charvectorizer import charVectorizer
 from chardataset import charDataset
