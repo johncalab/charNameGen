@@ -44,13 +44,6 @@ if args.dropout:
 else:
     model = charModel(vocab_size=len(vocab),padding_idx=maskid)
 
-# set device
-if args.cuda and torch.cuda.is_available():
-    device = torch.device(args.device)
-else:
-    device = torch.device('cpu')
-# transfer model to device
-model.to(device)
 print(f"\nDevice used is {device}.")
 
 ds = charDataset(vectorizer=vectorizer, corpus=corpus)
@@ -60,6 +53,15 @@ optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9)
 
 from charsample import generate_sample
 print(generate_sample(model=model,vectorizer=vectorizer))
+
+# set device
+if args.cuda and torch.cuda.is_available():
+    device = torch.device(args.device)
+else:
+    device = torch.device('cpu')
+# transfer model to device
+model.to(device)
+
 num_epochs = args.ne
 try:
     for epoch in range(num_epochs):
@@ -81,8 +83,10 @@ try:
             optimizer.step()
 
         model.eval()
+        model.to('cpu')
         for i in range(5):
             print(generate_sample(model=model,vectorizer=vectorizer))
+        model.to(device)
 
 except KeyboardInterrupt:
     print("\nTraining was interrupted. That's ok, I'll still save the latest model.")
