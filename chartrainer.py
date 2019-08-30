@@ -59,7 +59,7 @@ dl = DataLoader(ds, batch_size=4, shuffle=True)
 optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9)
 
 from charsample import generate_sample
-print(generate_sample(model=model,vectorizer=vectorizer))
+print(generate_sample(model=model,vectorizer=vectorizer,device=device))
 num_epochs = args.ne
 try:
     for epoch in range(num_epochs):

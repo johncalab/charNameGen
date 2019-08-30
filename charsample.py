@@ -1,10 +1,17 @@
 import torch
 import torch.nn.functional as F
 
-def generate_sample(model, vectorizer, sample_size=30, rough=True, capitalization=False):
-
+def generate_sample(
+                model,
+                vectorizer,
+                sample_size=30,
+                rough=True,
+                capitalization=False,
+                cuda=False,
+                device=torch.device('cpu')):
+    
     beginid = vectorizer.vocab.begin_idx
-    begintensor = torch.tensor([beginid], dtype=torch.int64).unsqueeze(dim=0)
+    begintensor = torch.tensor([beginid], dtype=torch.int64).unsqueeze(dim=0).to(device)
     ind = [begintensor]
     t = 1
     x_t = ind[1-1]
