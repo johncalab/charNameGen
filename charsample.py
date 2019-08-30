@@ -6,12 +6,11 @@ def generate_sample(
                 vectorizer,
                 sample_size=30,
                 rough=True,
-                capitalization=False,
-                cuda=False,
-                device=torch.device('cpu')):
+                capitalization=False):
     
+    model.to('cpu')
     beginid = vectorizer.vocab.begin_idx
-    begintensor = torch.tensor([beginid], dtype=torch.int64).unsqueeze(dim=0).to(device)
+    begintensor = torch.tensor([beginid], dtype=torch.int64).unsqueeze(dim=0)
     ind = [begintensor]
     t = 1
     x_t = ind[1-1]
