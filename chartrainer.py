@@ -26,11 +26,15 @@ parser.add_argument('-device', type=str, default='cuda')
 
 args = parser.parse_args()
 
+from random import randint
+identifier = randint(100,999)
+identifier = str(identifier)
+
 vocab = charVocabulary()
 txt_path = os.path.join('source', args.source+'.txt')
 vocab.add_txt(txt_path)
 
-dict_path = os.path.join('source', args.source+'_dict.pkl')
+dict_path = os.path.join('models', args.source+'_'+identifier+'_dict.pkl')
 pickle.dump(vocab.token_to_idx, open(dict_path,'wb'))
 
 maskid = vocab.mask_idx
@@ -94,5 +98,5 @@ try:
 except KeyboardInterrupt:
     print("\nTraining was interrupted. That's ok, I'll still save the latest model.")
 
-model_path = os.path.join('models', args.source+'_model.pt')
+model_path = os.path.join('models', args.source+'_'+identifier+'_model.pt')
 torch.save(model.state_dict(), model_path)
