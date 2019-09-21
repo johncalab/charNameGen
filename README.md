@@ -24,3 +24,13 @@ These files can be used to train models.
 
 ### Training
 The file `chartrainer.py` is a script to train a model to generate names. It relies on all other .py files, and expects a choice of a source, contained in the `source` folder.
+
+## What's missing
+- **Conditioning**. Chapter 7 of Rao's book includes the option of changing the text the model spits out, dependent on a conditioning factor. For example, we might want to train names differently depending on nationality. To this end, one could proceed as follows. Training data should contain labels for each nationality. We should think of the labels as one-hot-encoded vectors. The model should then contain an extra embedding layer, spitting out a vector the same size as the hidden vector of the RNN. In turn, this vector is fed as $h_0$ of the RNN, acting as a *conditioning* factor. Something like this.
+```
+self.nation_embedding = nn.Embedding(embedding_dim=rnn_hidden_size, 
+                                             num_embeddings=num_nationalities)
+nationality_embedded = self.nation_emb(nationality_index).unsqueeze(0)
+y_out, _ = self.rnn(x_embedded, nationality_embedded)
+```
+- All of Chapter 8 (arguably the most interesting chapter): bidirectional RNNs, attention, ...
