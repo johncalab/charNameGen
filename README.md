@@ -33,4 +33,4 @@ self.nation_embedding = nn.Embedding(embedding_dim=rnn_hidden_size,
 nationality_embedded = self.nation_emb(nationality_index).unsqueeze(0)
 y_out, _ = self.rnn(x_embedded, nationality_embedded)
 ```
-- All of Chapter 8 (arguably the most interesting chapter): bidirectional RNNs, attention, ...
+- **Attention** Chapter 8 of Rao's book goes illustrates an attention mechanism, which would be cool to incorporate.
